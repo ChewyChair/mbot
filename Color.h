@@ -14,8 +14,7 @@ MeLightSensor lightSensor(PORT_8);
 
 long RGBvalues[3] = {};
 long total = 0;
-//long blackvalues[3] = {182, 150, 165}; //black values for near full charge
-long blackvalues[3] = {118, 114, 127};
+long blackvalues[3] = {118, 114, 127}; //black values for near full charge
 
 // Gets the average RGB values of the detected color
 void updateRGB();
@@ -48,24 +47,24 @@ void updateRGB() {
 Sign detectColor() {
   updateRGB();
   // long color = 0;
-  if (RGBvalues[0] >= 65) {
+  if (RGBvalues[0] >= 65) { //if red exceeds 65 it is yellow
     return U_TURN; // color = 2;
   }
-  else if (RGBvalues[0] >= 45) {
+  else if (RGBvalues[0] >= 45) { //if red is between 45 and 65 it is red
     return LEFT; // color = 1;
   }
-  else if (RGBvalues[0] >= 20) {
-    if (RGBvalues[1] >= 30) {
+  else if (RGBvalues[0] >= 20) { //if red is between 20 and 45 it could be either purple or blue
+    if (RGBvalues[1] >= 30) { //blue has a green value exceeding 30
       return DOUBLE_RIGHT; // color = 5;
-    } else {
+    } else { //purple's green value is less than 30
       return DOUBLE_LEFT; // color = 4;
     }
   } 
-  else {
-    if (RGBvalues[1] >= 20) {
+  else { //if red is less than 20 it could either be black or green
+    if (RGBvalues[1] >= 20) { //green has a green value exceeding 30
       return RIGHT; //color = 3;
     }
-    else {
+    else { //black's green value is close to 0
       return FINISH; // color = 0;
     }
   }

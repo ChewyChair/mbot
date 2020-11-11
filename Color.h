@@ -46,26 +46,25 @@ void updateRGB() {
 
 Sign detectColor() {
   updateRGB();
-  // long color = 0;
   if (RGBvalues[0] >= 65) { //if red exceeds 65 it is yellow
-    return U_TURN; // color = 2;
+    return U_TURN; // color = 2 (yellow);
   }
   else if (RGBvalues[0] >= 45) { //if red is between 45 and 65 it is red
-    return LEFT; // color = 1;
+    return LEFT; // color = 1 (red);
   }
   else if (RGBvalues[0] >= 20) { //if red is between 20 and 45 it could be either purple or blue
     if (RGBvalues[1] >= 30) { //blue has a green value exceeding 30
-      return DOUBLE_RIGHT; // color = 5;
+      return DOUBLE_RIGHT; // color = 5 (blue);
     } else { //purple's green value is less than 30
-      return DOUBLE_LEFT; // color = 4;
+      return DOUBLE_LEFT; // color = 4 (purple);
     }
   } 
   else { //if red is less than 20 it could either be black or green
     if (RGBvalues[1] >= 20) { //green has a green value exceeding 30
-      return RIGHT; //color = 3;
+      return RIGHT; //color = 3 (green);
     }
     else { //black's green value is close to 0
-      return FINISH; // color = 0;
+      return FINISH; // color = 0 (black);
     }
   }
 }
